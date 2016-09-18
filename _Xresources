@@ -1,4 +1,4 @@
-URxvt*font: xft:Ubuntu\ Mono:style=Regular:pixelsize=11
+URxvt*font: xft:Ubuntu\ Mono:style=Regular:pixelsize=16
 URxvt*scrollstyle: plain
 URxvt*scrollBar_right: true
 URxvt.saveLines: 55120

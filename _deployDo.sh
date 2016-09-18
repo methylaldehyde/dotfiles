@@ -1,5 +1,5 @@
-[ -z "$1" ] && dest="/home/sweater/github/dotfiles" || dest=$1
-home='/home/sweater'
+[ -z "$1" ] && dest="/home/theo/github/dotfiles" || dest=$1
+home='/home/theo'
 
 for c in \
     '.bashrc' \
@@ -43,7 +43,7 @@ do
 done
 
 mkdir -p ${home}/.emacs.d/plugins/
-git clone git@github.com:manpages/evil-org-mode.git ${home}/.emacs.d/plugins/evil-org-mode
+git clone https://github.com/manpages/evil-org-mode.git ${home}/.emacs.d/plugins/evil-org-mode
 cp -vru _emacs.d/wilderness ${home}/.emacs.d/
 
 mkdir -p ${home}/.js

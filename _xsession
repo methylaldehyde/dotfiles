@@ -1,10 +1,7 @@
 clipit &
 xrdb ~/.Xresources &
 firefox &
-urxvt -e newsbeuter &
-( sleep 5; killall ssh; sh ${HOME}/forward ) &
 ~/.fehbg &
 xsetroot -cursor_name left_ptr &
-arbtt-capture &
-setxkbmap "lv,ru" option grp:caps_toggle &
+setxkbmap "lv"
 exec xmonad

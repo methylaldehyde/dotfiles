@@ -1,7 +1,7 @@
 [ -z "$1" ] &&  msg="Dotfiles autosync"             ||  msg=$1
-[ -z "$2" ] && dest="/home/sweater/github/dotfiles" || dest=$2
+[ -z "$2" ] && dest="/home/theo/github/dotfiles"    || dest=$2
 [ -z "$3" ] && push=""                              || push=$3
-home='/home/sweater'
+home='/home/theo'
 
 for c in \
     '.bashrc' \

@@ -1,3 +1,8 @@
+;;; .emacs -- Emacs configuration file
+;;; Commentary:
+;;; This is a fork of manpages .emacs, using some good stuff by volhovm
+
+;;; Code:
 (load "~/.emacs.d/wilderness/defuns.el")
 
 ;; while deploying emacs on a new machine, cross your fingers and hope for best
@@ -14,13 +19,13 @@
         (eval-buffer)))
 
 ;; Sorrow.
-(quelpas 'evil 'evil-magit 'evil-surround 'evil-leader
-	 'rainbow-delimiters 'haskell-mode 'flycheck-haskell)
+;(quelpas 'evil 'evil-magit 'evil-surround 'evil-leader
+;	 'rainbow-delimiters 'haskell-mode 'flycheck-haskell)
 
 (package-initialize)
-(setq evil-want-C-i-jump nil)
 (add-to-list 'load-path "~/.emacs.d/plugins/evil-org-mode")
 (require 'evil-org)
+(setq evil-want-C-i-jump nil)
 
 ;; Leader
 (global-evil-leader-mode)
@@ -35,13 +40,15 @@
 		  "DONE(o!)" "CANCELED(c@/!)")))
 ; \emsp fix by Misha
 (defun my-org-clocktable-indent-string (level)
+  "LEVEL -- indentation level."
   (if (= level 1)
       ""
     (let ((str "▶"))
       (while (> level 2)
 	(setq level (1- level)
 	      str (concat str "  ")))
-      (concat str " "))))
+      (concat str " ")))
+  )
 (advice-add 'org-clocktable-indent-string :override #'my-org-clocktable-indent-string)
 
 ;; haskell
@@ -56,7 +63,7 @@
   (whitespace-mode)
   (volhovm-haskell-style)
   (hindent-mode))
-;; make advanced tools usable`
+;; make advanced tools usable
 '(flycheck-ghc-args (quote ("-v")))
 '(flycheck-haskell-runghc-command
   (quote
@@ -104,8 +111,8 @@
 (setq auto-save-default nil)
 
 ;; boring shit
-(set-cursor-color "#997A8D") 
-(set-mouse-color "#997A8D") 
+(set-cursor-color "#997A8D")
+(set-mouse-color "#997A8D")
 (blink-cursor-mode 0)
 (tool-bar-mode -1)
 (menu-bar-mode -1)
@@ -139,3 +146,6 @@
  ;; If there is more than one, they won't work right.
  '(whitespace-newline ((t (:foreground "black" :weight normal))))
  '(whitespace-space ((t (:background "black" :foreground "black")))))
+
+(provide '.emacs)
+;;; .emacs ends here

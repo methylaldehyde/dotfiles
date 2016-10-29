@@ -1,3 +1,7 @@
+;;; defuns -- Collection of handy functions
+;;; Commentary:
+;;; This is a fork of manpages .emacs.d/wilderness
+
 (defun kill-region-or-backward-word ()
     "If the region is active and non-empty, call `kill-region'. Otherwise, call `backward-kill-word'."
     (interactive)

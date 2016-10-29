@@ -3,12 +3,22 @@ set -o vi
 export EDITOR="vim"
 export TERM="screen-256color"
 
-ps1_date="\[$(tput bold)\]\[$(tput setaf 242)\]\$(date +'%a %b %d %H:%M:%S:%N')"
-ps1_user="\[$(tput setaf 227)\]\u\[$(tput setaf 242)\]@\[$(tput setaf 227)\]\h"
-ps1_path="\[$(tput setaf 242)\]\w"
-ps1_lambda="\[$(tput setaf 242)\]λ\[$(tput sgr0)\]"
+fcc() {
+  tput setaf $1
+}
+
+ps1_date="\[$(tput bold)\]\[$(fcc 242)\]\$(date +'%a %b %d %H:%M:%S:%N')"
+ps1_theophorus="\[$(fcc 196)\]th\[$(fcc 202)\]e\[$(fcc 220)\]o\[$(fcc 34)\]ph\[$(fcc 39)\]o\[$(fcc 27)\]r\[$(fcc 129)\]us"
+if [ $(hostname)=="theophorus" ]; then
+  #ps1_user="\[$(fcc 231)\]\u\[$(fcc 242)\]@${ps1_theophorus}"
+  ps1_user="\[$(fcc 88)\]\u\[$(fcc 196)\]@\[$(fcc 88)\]\h"
+else
+  ps1_user="\[$(fcc 227)\]\u\[$(fcc 242)\]@\[$(fcc 227)\]\h"
+fi
+ps1_path="\[$(fcc 242)\]\w"
+ps1_lambda="\[$(fcc 242)\]λ\[$(tput sgr0)\]"
 for x in {0..256}; do
-  ps1_tester="${ps1_tester}\[$(tput setaf $x)\]$x"
+  ps1_tester="${ps1_tester}\[$(fcc $x)\]$x"
 done
 
 git_prompt() {

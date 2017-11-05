@@ -19,13 +19,12 @@
         (eval-buffer)))
 
 ;; Sorrow.
-;(quelpas 'evil 'evil-magit 'evil-surround 'evil-leader
+;(quelpas 'evil 'evil-org 'evil-magit 'evil-surround 'evil-leader
 ;	 'rainbow-delimiters 'haskell-mode 'flycheck-haskell)
 
 (package-initialize)
 (add-to-list 'load-path "~/.emacs.d/plugins/evil-org-mode")
 (require 'evil-org)
-(setq evil-want-C-i-jump nil)
 
 ;; Leader
 (global-evil-leader-mode)
@@ -50,45 +49,48 @@
       (concat str " ")))
   )
 (advice-add 'org-clocktable-indent-string :override #'my-org-clocktable-indent-string)
+(add-hook 'org-mode-hook
+          (lambda ()
+	    (define-key evil-normal-state-map (kbd "TAB") 'org-cycle)))
 
 ;; haskell
 ;; smart stuff by Misha
-(require 'haskell-process)
-(require 'hindent)
-(setq-default hindent-style "johan-tibell")
-(add-hook 'haskell-mode-hook 'volhovm-haskell-mode-hook)
-(defun volhovm-haskell-mode-hook ()
-  "Func for haskell-mode hook."
-  (interactive-haskell-mode)
-  (whitespace-mode)
-  (volhovm-haskell-style)
-  (hindent-mode))
-;; make advanced tools usable
-'(flycheck-ghc-args (quote ("-v")))
-'(flycheck-haskell-runghc-command
-  (quote
-   ("stack" "--verbosity" "silent" "runghc" "--")))
-'(haskell-interactive-popup-errors nil)
-'(haskell-process-args-stack-ghci (quote ("--ghc-options=-ferror-spans")))
-'(haskell-process-log t)
-'(haskell-process-type (quote auto))
-;; eye-candy
-(global-prettify-symbols-mode t)
-(load "~/.emacs.d/wilderness/haskell.el")
-(setq haskell-stylish-on-save t)
-;; we've got style, we've got moves
-(defun volhovm-haskell-style ()
-  "Style properties for haskell."
-  (interactive)
-  (setq tab-width 4
-	haskell-indentation-layout-offset 4
-	haskell-indentation-left-offset 4
-	haskell-indentation-ifte-offset 4))
-;; not-so-smart stuff by Jonn
-(add-hook 'after-init-hook #'global-flycheck-mode)
-(add-hook 'text-mode-hook 'turn-on-auto-fill)
-(eval-after-load 'flycheck
-  '(add-hook 'flycheck-mode-hook #'flycheck-haskell-setup))
+;(require 'haskell-process)
+;(require 'hindent)
+;(setq-default hindent-style "johan-tibell")
+;(add-hook 'haskell-mode-hook 'volhovm-haskell-mode-hook)
+;(defun volhovm-haskell-mode-hook ()
+;  "Func for haskell-mode hook."
+;  (interactive-haskell-mode)
+;  (whitespace-mode)
+;  (volhovm-haskell-style)
+;  (hindent-mode))
+;;; make advanced tools usable
+;'(flycheck-ghc-args (quote ("-v")))
+;'(flycheck-haskell-runghc-command
+;  (quote
+;   ("stack" "--verbosity" "silent" "runghc" "--")))
+;'(haskell-interactive-popup-errors nil)
+;'(haskell-process-args-stack-ghci (quote ("--ghc-options=-ferror-spans")))
+;'(haskell-process-log t)
+;'(haskell-process-type (quote auto))
+;;; eye-candy
+;(global-prettify-symbols-mode t)
+;(load "~/.emacs.d/wilderness/haskell.el")
+;(setq haskell-stylish-on-save t)
+;;; we've got style, we've got moves
+;(defun volhovm-haskell-style ()
+;  "Style properties for haskell."
+;  (interactive)
+;  (setq tab-width 4
+;	haskell-indentation-layout-offset 4
+;	haskell-indentation-left-offset 4
+;	haskell-indentation-ifte-offset 4))
+;;; not-so-smart stuff by Jonn
+;(add-hook 'after-init-hook #'global-flycheck-mode)
+;(add-hook 'text-mode-hook 'turn-on-auto-fill)
+;(eval-after-load 'flycheck
+;  '(add-hook 'flycheck-mode-hook #'flycheck-haskell-setup))
 
 ;; monochrome scheme is ok
 (load "~/.emacs.d/wilderness/monochrome-theme.el")
